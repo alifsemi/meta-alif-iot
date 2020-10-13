@@ -1,0 +1,41 @@
+This README file contains information on the contents of the meta-bolt-iot layer.
+
+Please see the corresponding sections below for details.
+
+Dependencies
+============
+
+  URI: openembedded-core
+  branch: zeus
+
+  URI: meta-bolt
+  branch: bolt-fpga
+
+  .
+  .
+  .
+
+Patches
+=======
+
+Please submit any patches against the meta-bolt-iot layer to the meta-bolt-iot mailing list (srinivasa@alifsemi.com)
+and cc: the maintainer:
+
+Maintainer: Srinivasa Rao Ragolu <srinivasa@alifsemi.com>
+
+Table of Contents
+=================
+
+  I. Adding the meta-bolt-iot layer to your build
+ II. Misc
+
+
+I. Adding the meta-bolt-iot layer to your build
+=================================================
+
+Run 'bitbake-layers add-layer meta-bolt-iot'
+
+II. Misc
+========
+
+--- replace with specific information about the meta-bolt-iot layer ---
