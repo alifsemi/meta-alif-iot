@@ -1,0 +1,12 @@
+diff -Naur git.orig/pal/linux/socket_async_os.h git/pal/linux/socket_async_os.h
+--- git.orig/pal/linux/socket_async_os.h	2020-10-15 13:49:53.992131535 +0530
++++ git/pal/linux/socket_async_os.h	2020-10-15 13:51:23.838503622 +0530
+@@ -10,7 +10,7 @@
+ #include <sys/select.h>
+ #include <netinet/in.h>
+ #include <netinet/tcp.h>
+-#include <sys/errno.h>
++#include <errno.h>
+ #include <fcntl.h>
+ #include <unistd.h>
+ #include <netdb.h>
