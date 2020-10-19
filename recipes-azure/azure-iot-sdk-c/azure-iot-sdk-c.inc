@@ -35,4 +35,3 @@ FILES_${PN}-dev += "\
     ${exec_prefix}/cmake \
 "
 
-BBCLASSEXTEND = "native nativesdk"
