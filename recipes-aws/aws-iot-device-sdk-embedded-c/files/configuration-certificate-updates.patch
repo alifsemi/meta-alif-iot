@@ -1,0 +1,61 @@
+diff -Naur aws-iot-device-sdk-embedded-C-3.1.1.orig/samples/linux/subscribe_publish_sample/subscribe_publish_sample.c aws-iot-device-sdk-embedded-C-3.1.1/samples/linux/subscribe_publish_sample/subscribe_publish_sample.c
+--- aws-iot-device-sdk-embedded-C-3.1.1.orig/samples/linux/subscribe_publish_sample/subscribe_publish_sample.c	2021-06-30 21:07:17.315496484 +0530
++++ aws-iot-device-sdk-embedded-C-3.1.1/samples/linux/subscribe_publish_sample/subscribe_publish_sample.c	2021-06-30 21:13:48.483488630 +0530
+@@ -18,7 +18,7 @@
+  * @brief simple MQTT publish and subscribe on the same topic
+  *
+  * This example takes the parameters from the aws_iot_config.h file and establishes a connection to the AWS IoT MQTT Platform.
+- * It subscribes and publishes to the same topic - "sdkTest/sub"
++ * It subscribes and publishes to the same topic - "alifTest/sub"
+  *
+  * If all the certs are correct, you should see the messages received by the application in a loop.
+  *
+@@ -41,7 +41,7 @@
+ /**
+  * @brief Default cert location
+  */
+-static char certDirectory[PATH_MAX + 1] = "../../../certs";
++static char certDirectory[PATH_MAX + 1] = "../../etc/certs";
+ 
+ /**
+  * @brief Default MQTT HOST URL is pulled from the aws_iot_config.h
+@@ -202,13 +202,13 @@
+ 	}
+ 
+ 	IOT_INFO("Subscribing...");
+-	rc = aws_iot_mqtt_subscribe(&client, "sdkTest/sub", 11, QOS0, iot_subscribe_callback_handler, NULL);
++	rc = aws_iot_mqtt_subscribe(&client, "alifTest/sub", 11, QOS0, iot_subscribe_callback_handler, NULL);
+ 	if(SUCCESS != rc) {
+ 		IOT_ERROR("Error subscribing : %d ", rc);
+ 		return rc;
+ 	}
+ 
+-	sprintf(cPayload, "%s : %d ", "hello from SDK", i);
++	sprintf(cPayload, "%s : %d ", "hello from ALIF SEMICONDUCTOR", i);
+ 
+ 	paramsQOS0.qos = QOS0;
+ 	paramsQOS0.payload = (void *) cPayload;
+@@ -234,9 +234,9 @@
+ 
+ 		IOT_INFO("-->sleep");
+ 		sleep(1);
+-		sprintf(cPayload, "%s : %d ", "hello from SDK QOS0", i++);
++		sprintf(cPayload, "%s : %d ", "hello from Alif Semiconductor QOS0", i++);
+ 		paramsQOS0.payloadLen = strlen(cPayload);
+-		rc = aws_iot_mqtt_publish(&client, "sdkTest/sub", 11, &paramsQOS0);
++		rc = aws_iot_mqtt_publish(&client, "alifTest/sub", 11, &paramsQOS0);
+ 		if(publishCount > 0) {
+ 			publishCount--;
+ 		}
+@@ -245,9 +245,9 @@
+ 			break;
+ 		}
+ 
+-		sprintf(cPayload, "%s : %d ", "hello from SDK QOS1", i++);
++		sprintf(cPayload, "%s : %d ", "hello from Alif Semiconductors QOS1", i++);
+ 		paramsQOS1.payloadLen = strlen(cPayload);
+-		rc = aws_iot_mqtt_publish(&client, "sdkTest/sub", 11, &paramsQOS1);
++		rc = aws_iot_mqtt_publish(&client, "alifTest/sub", 11, &paramsQOS1);
+ 		if (rc == MQTT_REQUEST_TIMEOUT_ERROR) {
+ 			IOT_WARN("QOS1 publish ack not received.\n");
+ 			rc = SUCCESS;

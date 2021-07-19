@@ -5,19 +5,23 @@ applications to securely connect to the AWS IoT platform."
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=acc7a1bf87c055789657b148939e4b40"
 
-
 SRC_URI = "https://github.com/aws/aws-iot-device-sdk-embedded-C/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz;name=aws-sdk \
            https://tls.mbed.org/download/mbedtls-2.16.6-apache.tgz;name=mbedtls \
+	   file://configuration-certificate-updates.patch;apply=yes \
+	   file://*pem* \
+	   file://resolv.conf \
 "
 
 S = "${WORKDIR}/aws-iot-device-sdk-embedded-C-${PV}"
 
-AWS_IOT_MQTT_HOST ?= "fixme"
-AWS_IOT_MQTT_CLIENT_ID ?= "fixme"
-AWS_IOT_MY_THING_NAME ?= "fixme"
-AWS_IOT_ROOT_CA_FILENAME ?= "fixme"
-AWS_IOT_CERTIFICATE_FILENAME ?= "fixme"
-AWS_IOT_PRIVATE_KEY_FILENAME ?= "fixme"
+LDFLAGS = "${TARGET_CC_ARCH}"
+
+AWS_IOT_MQTT_HOST ?= "a2g7twmqo7hg82-ats.iot.ap-south-1.amazonaws.com"
+AWS_IOT_MQTT_CLIENT_ID ?= "MyThing"
+AWS_IOT_MY_THING_NAME ?= "MyThing"
+AWS_IOT_ROOT_CA_FILENAME ?= "AmazonRootCA1.pem"
+AWS_IOT_CERTIFICATE_FILENAME ?= "4960bd2f6b-certificate.pem.crt"
+AWS_IOT_PRIVATE_KEY_FILENAME ?= "4960bd2f6b-private.pem.key"
 
 do_compile () {
     cp -a ${WORKDIR}/mbedtls-2.16.6/* ${S}/external_libs/mbedTLS/
@@ -30,6 +34,13 @@ do_compile () {
         -e "s:define AWS_IOT_CERTIFICATE_FILENAME.*:define AWS_IOT_CERTIFICATE_FILENAME \"${AWS_IOT_CERTIFICATE_FILENAME}\":g" \
         -e "s:define AWS_IOT_PRIVATE_KEY_FILENAME.*:define AWS_IOT_PRIVATE_KEY_FILENAME \"${AWS_IOT_PRIVATE_KEY_FILENAME}\":g" aws_iot_config.h ; make -f Makefile CC="${CC}" ; popd
     done
+}
+
+do_install () {
+    install -D -m 0755 ${S}/samples/linux/subscribe_publish_sample/subscribe_publish_sample ${D}${bindir}/subscribe_publish_sample
+    install -d -p ${D}${sysconfdir}/certs
+    install -m -r ${WORKDIR}/*pem* ${D}${sysconfdir}/certs
+    install -m 0555 ${WORKDIR}/resolv.conf ${D}${sysconfdir}
 }
 
 INSANE_SKIP += "src-uri-bad"
