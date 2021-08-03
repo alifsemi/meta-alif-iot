@@ -11,9 +11,14 @@ SRC_URI = "\
 PR = "r0"
 
 include ${BPN}.inc
-AZURE_DEV_CONNECTION_STRING ?= "fixme"
+AZURE_DEV_CONNECTION_STRING ?= "FIXME"
 
 do_compile_prepend () {
 	find ${S}/iothub_client/samples/ -type f | xargs sed -i -e "s:static const char\* connectionString =.*:static const char\* connectionString = \"${AZURE_DEV_CONNECTION_STRING}\";:g"
 }
+
+do_install () {
+    install -D -m 0755 ${WORKDIR}/build/iothub_client/samples/iothub_convenience_sample/iothub_convenience_sample ${D}${bindir}/iothub_convenience_sample
+}
+FILES_${PN} += "${bindir}/*"
 

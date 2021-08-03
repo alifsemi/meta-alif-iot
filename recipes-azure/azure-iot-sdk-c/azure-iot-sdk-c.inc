@@ -13,7 +13,7 @@ SRC_URI += "\
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
-PACKAGECONFIG ??= "amqp http mqtt"
+PACKAGECONFIG ??= "mqtt"
 PACKAGECONFIG[amqp] = "-Duse_amqp:BOOL=ON, -Duse_amqp:BOOL=OFF, azure-uamqp-c"
 PACKAGECONFIG[edge] = "-Duse_edge_modules:BOOL=ON, -Duse_edge_modules:BOOL=OFF, azure-uhttp-c"
 PACKAGECONFIG[http] = "-Duse_http:BOOL=ON, -Duse_http:BOOL=OFF, azure-uhttp-c"
@@ -25,6 +25,8 @@ EXTRA_OECMAKE = "\
     -Duse_installed_dependencies:BOOL=ON \
     -Dbuild_service_client:BOOL=OFF \
     -Dbuild_provisioning_service_client:BOOL=OFF \
+    -Duse_openssl:BOOL=OFF \
+    -Duse_mbedtls:BOOL=ON \
 "
 
 sysroot_stage_all_append () {
