@@ -1,4 +1,4 @@
-This README file contains information on the contents of the meta-alif-ensemble-iot layer.
+This README file contains information on the contents of the meta-alif-iot layer.
 
 Please see the corresponding sections below for details.
 
@@ -8,7 +8,7 @@ Dependencies
   URI: openembedded-core
   branch: zeus
 
-  URI: meta-alif-ensemble
+  URI: meta-alif
   branch: devkit-ex
 
   .
@@ -18,7 +18,7 @@ Dependencies
 Patches
 =======
 
-Please submit any patches against the meta-alif-ensemble-iot layer to the 
+Please submit any patches against the meta-alif-iot layer to the
 following maintainer.
 
 Maintainer: Srinivasa Rao Ragolu <srinivasa@alifsemi.com>
@@ -26,16 +26,16 @@ Maintainer: Srinivasa Rao Ragolu <srinivasa@alifsemi.com>
 Table of Contents
 =================
 
-  I. Adding the meta-alif-ensemble-iot layer to your build
+  I. Adding the meta-alif-iot layer to your build
  II. Misc
 
 
-I. Adding the meta-alif-ensemble-iot layer to your build
+I. Adding the meta-alif-iot layer to your build
 =================================================
 
-Run 'bitbake-layers add-layer meta-alif-ensemble-iot'
+Run 'bitbake-layers add-layer meta-alif-iot'
 
 II. Misc
 ========
 
---- replace with specific information about the meta-alif-ensemble-iot layer ---
+--- replace with specific information about the meta-alif-iot layer ---
